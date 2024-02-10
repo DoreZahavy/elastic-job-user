@@ -1,8 +1,9 @@
+import { log } from 'console'
 import { User } from '../models/user.model.js'
-import {dbService} from '../services/db.service.js'
-import {logger} from '../services/logger.service.js'
+import { dbService } from '../services/db.service.js'
+import { logger } from '../services/logger.service.js'
 import mongodb from 'mongodb'
-const {ObjectId} = mongodb
+const { ObjectId } = mongodb
 
 export const userService = {
     add,            // Create (Signup)
@@ -32,11 +33,12 @@ async function query(filterBy = {}) {
     }
 }
 
-async function getById(userId : string) {
+async function getById(userId: string) {
+    
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ _id: new ObjectId(userId) })
-        if(user?.password) delete user.password
+        if (user?.password) delete user.password
         return user
     } catch (err) {
         logger.error(`while finding user by id: ${userId}`, err)
@@ -44,7 +46,7 @@ async function getById(userId : string) {
     }
 }
 
-async function getByEmail(email : string) {
+async function getByEmail(email: string) {
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ email })
@@ -55,7 +57,7 @@ async function getByEmail(email : string) {
     }
 }
 
-async function remove(userId : string) {
+async function remove(userId: string) {
     try {
         const collection = await dbService.getCollection('user')
         await collection.deleteOne({ _id: new ObjectId(userId) })
@@ -65,14 +67,15 @@ async function remove(userId : string) {
     }
 }
 
-async function update(user : User) {
+async function update(user: Partial<User>) {
     try {
         // peek only updatable properties
         const userToSave = {
+            ...user,
             _id: new ObjectId(user._id), // needed for the returned obj
-            fullName: user.fullName,
-
         }
+        // const userToSave = user
+        // user._id = new ObjectId(user._id)
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
         return userToSave
@@ -82,18 +85,19 @@ async function update(user : User) {
     }
 }
 
-async function add(user : User) {
+async function add(user: User) {
     try {
 
-         // Validate that there are no such user:
-         const existUser = await getByEmail(user.email)
-         if (existUser) throw new Error('Email taken')
+        // Validate that there are no such user:
+        const existUser = await getByEmail(user.email)
+        if (existUser) throw new Error('Email taken')
         // peek only updatable fields!
-        const userToAdd = {
-            email: user.email,
-            password: user.password,
-            fullName: user.fullName,
-            imgUrl: user.imgUrl,
+        const userToAdd : Omit<User, "_id">= {
+            ...user
+            // email: user.email,
+            // password: user.password,
+            // fullName: user.fullName,
+            // imgUrl: user.imgUrl,
 
         }
         const collection = await dbService.getCollection('user')
