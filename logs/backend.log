@@ -1,3 +1,13 @@
 10.2.2024, 13:15:19 - INFO - Req was made | / 
 10.2.2024, 13:24:58 - INFO - Req was made | / 
 10.2.2024, 13:25:10 - INFO - Req was made | / 
+11.2.2024, 1:10:59 - ERROR - while finding user by id: check-email | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:10:59 - ERROR - Failed to get user | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:17 - ERROR - while finding user by id: check-email | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:17 - ERROR - Failed to get user | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:29 - ERROR - while finding user by id: check-email | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:29 - ERROR - Failed to get user | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:52 - ERROR - while finding user by id: check-email | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:12:52 - ERROR - Failed to get user | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:17:01 - ERROR - while finding user by id: check-email | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
+11.2.2024, 1:17:01 - ERROR - Failed to get user | BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer 
