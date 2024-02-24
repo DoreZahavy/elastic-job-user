@@ -14,6 +14,15 @@ export async function getUserById(req: Request, res: Response) {
         res.status(400).send({ err: 'Failed to get user' })
     }
 }
+export async function getUserByEmail(req: Request, res: Response) {
+    try {
+        const user = await userService.getByEmail(req.params.email)
+        res.send(user)
+    } catch (err) {
+        logger.error('Failed to get user', err)
+        res.status(400).send({ err: 'Failed to get user' })
+    }
+}
 
 export async function getUsers(req: Request, res: Response) {
     try {
@@ -59,5 +68,22 @@ export async function updateUser(req: Request, res: Response) {
     } catch (err) {
         logger.error('Failed to update user', err)
         res.status(400).send({ err: 'Failed to update user' })
+    }
+}
+
+export async function checkEmail(req: Request, res: Response) {
+    // const { email } = req.query;
+    // console.log("🚀 ~ checkEmail ~ email:", email)
+
+    try {
+        // Check if a user with the provided email exists in the database
+        const existingUser = await userService.getByEmail(req.params.email)
+
+        // Return true if a user with the email exists, false otherwise
+        res.json(!!existingUser);
+    } catch (error) {
+        // Handle errors (e.g., database errors)
+        console.error('Error checking existing email:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 }

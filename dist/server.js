@@ -24,11 +24,11 @@ else {
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js';
 app.all('*', setupAsyncLocalStorage);
 import { userRoutes } from './user/user.routes.js';
-app.use('/api', userRoutes);
+app.use('/user', userRoutes);
 // Make every server-side-route to match the index.html
-app.get('/**', (req, res) => {
-    res.sendFile(path.resolve('public/index.html'));
-});
+// app.get('/**', (req, res) => {
+//     res.sendFile(path.resolve('public/index.html'));
+// });
 // Start the server
 const port = Number(process.env.PORT) || 3031;
 server.listen(port, () => {
